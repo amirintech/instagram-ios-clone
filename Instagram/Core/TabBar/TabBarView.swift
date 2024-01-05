@@ -13,15 +13,31 @@ struct TabBarView: View {
         
         TabView {
             Text("Feed")
+                .tabItem {
+                    Image(systemName: "house")
+                }
             
             Text("Search")
+                .tabItem {
+                    Image(systemName: "magnifyingglass")
+                }
             
             Text("Upload")
+                .tabItem {
+                    Image(systemName: "plus.square")
+                }
             
             Text("Notifications")
+                .tabItem {
+                    Image(systemName: "bell")
+                }
             
-            Text("Profile")
+            ProfileView()
+                .tabItem {
+                    Image(systemName: "person")
+                }
         }
+        .tint(.black)
         
         
     }
