@@ -16,17 +16,21 @@ struct SearchView: View {
         NavigationStack {
             ScrollView {
                 LazyVStack(spacing: 16) {
-                    SearchItemView()
-                    SearchItemView()
-                    SearchItemView()
-                    SearchItemView()
+                    ForEach(User.MOCK_USERS) { user in
+                        NavigationLink(value: user) {
+                            SearchItemView(user: user)
+                        }
+                    }
                 }
                 .searchable(text: $searchQuery)
                 .padding(.top, 8)
+                .foregroundStyle(.black)
             }
-            .navigationTitle("Search")
+            .navigationTitle("Explore")
             .navigationBarTitleDisplayMode(.inline)
-            
+            .navigationDestination(for: User.self) { user in
+                ProfileStructureView(user: .MOCK_USERS[0])
+            }
         }
         
         

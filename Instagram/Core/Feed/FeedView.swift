@@ -14,13 +14,9 @@ struct FeedView: View {
         NavigationStack {
             ScrollView {
                 LazyVStack(spacing: 42)  {
-                    FeedCellView()
-                    FeedCellView()
-                    FeedCellView()
-                    FeedCellView()
-                    FeedCellView()
-                    FeedCellView()
-                    FeedCellView()
+                    ForEach(Post.MOCK_POSTS) { post in
+                        FeedCellView(post: post)
+                    }
                 }
             }
             .navigationTitle("Feed")

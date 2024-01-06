@@ -8,21 +8,27 @@
 import SwiftUI
 
 struct FeedCellView: View {
+    let post: Post
+    
     var body: some View {
         
         
         VStack {
             // MARK: Profile pic & username
             HStack {
-                Image("ned-stark")
-                    .resizable()
-                    .scaledToFill()
-                    .frame(width: 42, height: 42)
-                    .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                if let profileImage = post.user?.profileImageUrl {
+                    Image(profileImage)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 42, height: 42)
+                        .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                }
                 
-                Text("nedstark")
-                    .font(.footnote)
-                    .fontWeight(.semibold)
+                if let username = post.user?.username {
+                    Text(username)
+                        .font(.footnote)
+                        .fontWeight(.semibold)
+                }
                 
                 Spacer()
             }
@@ -30,7 +36,7 @@ struct FeedCellView: View {
             
             
             // MARK: Post img
-            Image("post-img")
+            Image(post.imageUrl)
                 .resizable()
                 .scaledToFill()
                 .frame(height: 400)
@@ -51,18 +57,20 @@ struct FeedCellView: View {
             
             VStack(alignment: .leading, spacing: 1) {
                 // MARK: Likes label
-                Text("291 likes")
+                Text("\(post.likes) likes")
                     .font(.footnote)
                     .fontWeight(.semibold)
                 
                 // MARK: Caption label
-                HStack {
-                    Text("nedstark ")
-                        .fontWeight(.semibold) +
-                    Text("Some awesome caption written by warden of the north goes here.")
+                if let username = post.user?.username {
+                    HStack {
+                        Text("\(username) ")
+                            .fontWeight(.semibold) +
+                        Text(post.caption)
+                    }
+                    .font(.footnote)
+                    .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
                 }
-                .font(.footnote)
-                .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
                 
                 // MARK: Timestamp
                 Text("12h ago")
@@ -77,5 +85,5 @@ struct FeedCellView: View {
 }
 
 #Preview {
-    FeedCellView()
+    FeedCellView(post: .MOCK_POSTS[0])
 }
