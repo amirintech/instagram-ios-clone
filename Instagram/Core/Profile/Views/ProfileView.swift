@@ -8,11 +8,13 @@
 import SwiftUI
 
 struct ProfileView: View {
+    let user: User
+    
     var body: some View {
         
         
         NavigationStack {
-            ProfileStructureView(user: .MOCK_USERS[0])
+            ProfileStructureView(user: user)
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
                         Button {
@@ -30,5 +32,5 @@ struct ProfileView: View {
 }
 
 #Preview {
-    ProfileView()
+    ProfileView(user: .MOCK_USERS[0])
 }

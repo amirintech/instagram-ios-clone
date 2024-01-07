@@ -15,11 +15,12 @@ struct ContentView: View {
         
         
         Group {
-            if viewModel.userSession != nil {
-                TabBarView()
-            } else {
+            if viewModel.userSession == nil {
                 LoginView()
                     .environmentObject(registerationViewModel)
+                
+            } else if let currentUser = viewModel.currentUser {
+                TabBarView(user: currentUser)
             }
         }
         

@@ -8,19 +8,19 @@
 import SwiftUI
 
 struct ProfileStructureView: View {
-    private let gridCols: [GridItem] = [
-        .init(.flexible(), spacing: 1),
-        .init(.flexible(), spacing: 1),
-        .init(.flexible(), spacing: 1),
-    ]
-    
     let user: User
-    
     var posts: [Post] {
         return Post.MOCK_POSTS.filter { $0.userId == user.id }
     }
     
     private let imageDimension = UIScreen.main.bounds.width / 3 - 1
+    private let gridCols: [GridItem] = [
+        .init(.flexible(), spacing: 1),
+        .init(.flexible(), spacing: 1),
+        .init(.flexible(), spacing: 1),
+    ]
+    @State private var showEditProfileView = false
+    
     
     var body: some View {
         
@@ -28,7 +28,7 @@ struct ProfileStructureView: View {
         ScrollView {
             VStack(spacing: 24) {
                 // MARK: Header
-                VStack {
+                VStack(spacing: 12) {
                     // MARK: Profile pic & stats
                     HStack {
                         Image(user.profileImageUrl ?? "default-profile-img")
@@ -61,23 +61,31 @@ struct ProfileStructureView: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     
                     // MARK: Action button
-                    Button {
-                        
-                    } label: {
-                        Text("Edit Profile")
-                            .font(.subheadline)
-                            .fontWeight(.semibold)
-                            .foregroundStyle(.black)
-                            .padding(.vertical, 8)
-                            .frame(maxWidth: .infinity)
-                            .overlay {
-                                RoundedRectangle(cornerRadius: 4)
-                                    .stroke(lineWidth: 1)
-                                    .foregroundStyle(.black)
-                            }
+                    if user.isCurrentUser {
+                        Button {
+                            showEditProfileView = true
+                        } label: {
+                            Text("Edit Profile")
+                                .font(.subheadline)
+                                .fontWeight(.semibold)
+                                .foregroundStyle(.black)
+                                .padding(.vertical, 8)
+                                .frame(maxWidth: .infinity)
+                                .overlay {
+                                    RoundedRectangle(cornerRadius: 4)
+                                        .stroke(lineWidth: 1)
+                                        .foregroundStyle(.black)
+                                }
+                        }
+                    } else {
+                        Button {
+                            
+                        } label: {
+                            Text("Follow")
+                                .modifier(PrimaryButtonLabelModifier(padding: (vertical: 8, horizontal: 0)))
+                        }
                     }
-                }
-                .padding(.horizontal)
+                }.padding(.horizontal)
                 
                 // MARK: Posts grid
                 LazyVGrid(columns: gridCols, spacing: 1) {
@@ -85,7 +93,7 @@ struct ProfileStructureView: View {
                         Image(post.imageUrl)
                             .resizable()
                             .frame(width: imageDimension, height: imageDimension)
-                            .scaledToFill()                            
+                            .scaledToFill()
                     }
                 }
                 
@@ -94,6 +102,12 @@ struct ProfileStructureView: View {
         }
         .navigationTitle("Profile")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            print(user)
+        }
+        .fullScreenCover(isPresented: $showEditProfileView) {
+            EditProfileView(user: user)
+        }
         
         
     }

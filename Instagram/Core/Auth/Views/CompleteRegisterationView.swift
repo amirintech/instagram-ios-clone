@@ -21,7 +21,8 @@ struct CompleteRegisterationView: View {
             Text("Welcome to Instagram, \(viewModel.username)")
                 .font(.title2)
                 .bold()
-                .padding(.top)
+                .padding(.horizontal)
+                .multilineTextAlignment(.center)
             
             Text("Click below to complete your registration and start using Instagram.")
                 .font(.footnote)

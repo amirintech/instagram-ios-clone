@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct TabBarView: View {
+    let user: User
     enum Views: Int {
         case Feed = 0
         case Explore = 1
@@ -46,7 +47,7 @@ struct TabBarView: View {
                 }
                 .tag(Views.Notification)
             
-            ProfileView()
+            ProfileView(user: user)
                 .tabItem {
                     Image(systemName: "person")
                 }
@@ -59,5 +60,5 @@ struct TabBarView: View {
 }
 
 #Preview {
-    TabBarView()
+    TabBarView(user: .MOCK_USERS[0])
 }

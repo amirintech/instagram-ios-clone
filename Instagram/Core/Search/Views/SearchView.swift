@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SearchView: View {
     @State var searchQuery = ""
+    @StateObject var viewModel = SearchViewModel()
     
     var body: some View {
         
@@ -16,7 +17,7 @@ struct SearchView: View {
         NavigationStack {
             ScrollView {
                 LazyVStack(spacing: 16) {
-                    ForEach(User.MOCK_USERS) { user in
+                    ForEach(viewModel.users) { user in
                         NavigationLink(value: user) {
                             SearchItemView(user: user)
                         }
@@ -29,7 +30,7 @@ struct SearchView: View {
             .navigationTitle("Explore")
             .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(for: User.self) { user in
-                ProfileStructureView(user: .MOCK_USERS[0])
+                ProfileStructureView(user: user)
             }
         }
         

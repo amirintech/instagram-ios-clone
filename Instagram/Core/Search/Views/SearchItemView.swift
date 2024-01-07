@@ -14,7 +14,7 @@ struct SearchItemView: View {
         
         
         HStack {
-            Image(user.profileImageUrl ?? "")
+            Image(user.profileImageUrl ?? "default-profile-img")
                 .resizable()
                 .scaledToFill()
                 .frame(width: 40, height: 40)
