@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-struct CompleteSignUpView: View {
+struct CompleteRegisterationView: View {
     @Environment(\.dismiss) var dismiss
+    @EnvironmentObject private var viewModel: RegisterationViewModel
     
     var body: some View {
         
@@ -17,7 +18,7 @@ struct CompleteSignUpView: View {
             Spacer()
             
             // MARK: Title & description
-            Text("Welcome to Instagram, wardenOfTheNorth")
+            Text("Welcome to Instagram, \(viewModel.username)")
                 .font(.title2)
                 .bold()
                 .padding(.top)
@@ -31,7 +32,7 @@ struct CompleteSignUpView: View {
             
             // MARK: Action button
             Button {
-                
+                Task { try await viewModel.createUser() }
             } label: {
                 Text("Complete Sign Up")
                     .modifier(PrimaryButtonLabelModifier())
@@ -54,5 +55,5 @@ struct CompleteSignUpView: View {
 }
 
 #Preview {
-    CompleteSignUpView()
+    CompleteRegisterationView()
 }

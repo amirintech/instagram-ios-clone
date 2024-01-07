@@ -8,9 +8,7 @@
 import SwiftUI
 
 struct LoginView: View {
-    @State private var email = ""
-    @State private var password = ""
-    
+    @StateObject var viewModel = LoginViewModel()
     let dividerMaxWidth = UIScreen.main.bounds.width / 2
     
     var body: some View {
@@ -28,11 +26,11 @@ struct LoginView: View {
                 
                 // MARK: Text fields
                 VStack {
-                    TextField("Enter your email", text: $email)
+                    TextField("Enter your email", text: $viewModel.email)
                         .modifier(TextFieldModifier())
-                        .textInputAutocapitalization(.none)
+                        .textInputAutocapitalization(.never)
                         
-                    SecureField("Enter your password", text: $password)
+                    SecureField("Enter your password", text: $viewModel.password)
                         .modifier(TextFieldModifier())
                 }
                 
@@ -50,7 +48,7 @@ struct LoginView: View {
                 
                 // MARK: Login button
                 Button {
-                    
+                    Task { try await viewModel.login() }
                 } label: {
                     Text("Login")
                         .modifier(PrimaryButtonLabelModifier())

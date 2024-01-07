@@ -15,8 +15,12 @@ struct ProfileView: View {
             ProfileStructureView(user: .MOCK_USERS[0])
                 .toolbar {
                     ToolbarItem(placement: .topBarTrailing) {
-                        Image(systemName: "line.3.horizontal")
-                            .foregroundStyle(.black)
+                        Button {
+                            AuthService.shared.signOut()
+                        } label: {
+                            Image(systemName: "line.3.horizontal")
+                                .foregroundStyle(.black)
+                        }
                     }
                 }
         }

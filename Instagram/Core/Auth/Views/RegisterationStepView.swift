@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SignUpStepView<Destination: View>: View {
+struct RegisterationStepView<Destination: View>: View {
     let title: String
     let description: String
     let textFieldPlaceholder: String
@@ -44,6 +44,7 @@ struct SignUpStepView<Destination: View>: View {
                 TextField(textFieldPlaceholder, text: $textFieldBinding)
                     .modifier(TextFieldModifier())
                     .padding(.top)
+                    .textInputAutocapitalization(.never)
             }
             
             
@@ -70,5 +71,5 @@ struct SignUpStepView<Destination: View>: View {
 }
 
 #Preview {
-    SignUpStepView(title: "Add your email", description: "You will use this email to sign in to your account.", textFieldPlaceholder: "Enter your email", actionLabel: "Next", nextView: Text("Done!"), textFieldBinding: .constant(""))
+    RegisterationStepView(title: "Add your email", description: "You will use this email to sign in to your account.", textFieldPlaceholder: "Enter your email", actionLabel: "Next", nextView: Text("Done!"), textFieldBinding: .constant(""))
 }
