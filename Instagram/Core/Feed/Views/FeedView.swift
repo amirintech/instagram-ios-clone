@@ -8,13 +8,15 @@
 import SwiftUI
 
 struct FeedView: View {
+    @StateObject var viewModel = FeedViewModel()
+    
     var body: some View {
         
         
         NavigationStack {
             ScrollView {
                 LazyVStack(spacing: 42)  {
-                    ForEach(Post.MOCK_POSTS) { post in
+                    ForEach(viewModel.posts) { post in
                         FeedCellView(post: post)
                     }
                 }

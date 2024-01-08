@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct FeedCellView: View {
     let post: Post
@@ -30,7 +31,7 @@ struct FeedCellView: View {
             
             
             // MARK: Post img
-            Image(post.imageUrl)
+            KFImage(URL(string: post.imageUrl))
                 .resizable()
                 .scaledToFill()
                 .frame(height: 400)
@@ -63,13 +64,14 @@ struct FeedCellView: View {
                         Text(post.caption)
                     }
                     .font(.footnote)
-                    .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
+                    
                 }
                 
                 // MARK: Timestamp
                 Text("12h ago")
                     .font(.footnote)
             }
+            .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading)
             .padding(.horizontal)
             .padding(.top, 1)
         }

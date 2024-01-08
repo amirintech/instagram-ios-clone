@@ -6,21 +6,24 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct ProfileStructureView: View {
-    let user: User
-    var posts: [Post] {
-        return Post.MOCK_POSTS.filter { $0.userId == user.id }
-    }
-    
     private let imageDimension = UIScreen.main.bounds.width / 3 - 1
     private let gridCols: [GridItem] = [
         .init(.flexible(), spacing: 1),
         .init(.flexible(), spacing: 1),
         .init(.flexible(), spacing: 1),
     ]
-    @State private var showEditProfileView = false
+    let user: User
     
+    @State private var showEditProfileView = false
+    @StateObject private var viewModel: ProfileStructureViewModel
+    
+    init(user: User) {
+        self.user = user
+        self._viewModel = StateObject(wrappedValue: ProfileStructureViewModel(user: user))
+    }
     
     var body: some View {
         
@@ -85,11 +88,12 @@ struct ProfileStructureView: View {
                 
                 // MARK: Posts grid
                 LazyVGrid(columns: gridCols, spacing: 1) {
-                    ForEach(posts) { post in
-                        Image(post.imageUrl)
+                    ForEach(viewModel.posts) { post in
+                        KFImage(URL(string: post.imageUrl))
                             .resizable()
-                            .frame(width: imageDimension, height: imageDimension)
                             .scaledToFill()
+                            .frame(width: imageDimension, height: imageDimension)
+                            .clipped()
                     }
                 }
                 

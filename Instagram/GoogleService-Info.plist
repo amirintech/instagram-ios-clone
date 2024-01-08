@@ -3,28 +3,28 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyBKHAOKz1bowXyWWV4TJnLDXQx3-Ez3bRw</string>
+	<string>AIzaSyCENRXndakvFh4ou3nodhAwTH1Gmopke48</string>
 	<key>GCM_SENDER_ID</key>
-	<string>579203687172</string>
+	<string>507472626842</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.amir.instagramclone.Instagram</string>
 	<key>PROJECT_ID</key>
-	<string>instagram-ios-app-8ff65</string>
+	<string>instagram-ios-36a49</string>
 	<key>STORAGE_BUCKET</key>
-	<string>instagram-ios-app-8ff65.appspot.com</string>
+	<string>instagram-ios-36a49.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:579203687172:ios:95ea16116a0d8f0a60e651</string>
+	<string>1:507472626842:ios:1230624b3ecff639538b23</string>
 </dict>
 </plist>

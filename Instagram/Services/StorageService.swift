@@ -9,10 +9,22 @@ import Foundation
 import Firebase
 import FirebaseStorage
 
+enum UploadDestination {
+    case profileImage
+    case postImage
+    
+    var path: String {
+        switch self {
+        case .profileImage: "profile_images"
+        case .postImage: "post_images"
+        }
+    }
+}
+
 struct StorageService {
-    static func uploadFile(type: UIImage) async throws -> String? {
+    static func uploadFile(type: UIImage, destination: UploadDestination) async throws -> String? {
         guard let data = type.jpegData(compressionQuality: 0.5) else { return nil }
-        let path = "/profile_images/\(AuthService.shared.currentUser!.id)/\(NSUUID().uuidString)"
+        let path = "/\(destination.path)/\(NSUUID().uuidString)"
         let ref = Storage.storage().reference(withPath: path)
         
         do {
