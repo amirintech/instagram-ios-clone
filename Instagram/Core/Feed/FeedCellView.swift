@@ -16,16 +16,10 @@ struct FeedCellView: View {
         VStack {
             // MARK: Profile pic & username
             HStack {
-                if let profileImage = post.user?.profileImageUrl {
-                    Image(profileImage)
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 42, height: 42)
-                        .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
-                }
-                
-                if let username = post.user?.username {
-                    Text(username)
+                if let user = post.user {
+                    ProfileImageView(user: post.user!, size: .extraSmall)
+                    
+                    Text(user.username)
                         .font(.footnote)
                         .fontWeight(.semibold)
                 }

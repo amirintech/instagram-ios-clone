@@ -61,11 +61,7 @@ struct EditProfileView: View {
                             .scaledToFill()
                             .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
                     } else {
-                        Image("default-profile-img")
-                            .resizable()
-                            .frame(width: 80, height: 80)
-                            .scaledToFill()
-                            .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                        ProfileImageView(user: viewModel.user, size: .large)
                     }
                     
                     
@@ -80,7 +76,7 @@ struct EditProfileView: View {
             
             
             // MARK: Edit profile info
-            EditableRowView(title: "Full name:", placeholder: "Amir", value: $viewModel.fullName)
+            EditableRowView(title: "Full name:", placeholder: "Enter your name", value: $viewModel.fullName)
             
             EditableRowView(title: "Bio:", placeholder: "Enter your bio", value: $viewModel.bio)
             

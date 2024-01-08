@@ -24,8 +24,8 @@ struct User: Identifiable, Codable, Hashable {
 
 extension User {
     static var MOCK_USERS = [
-        User(id: "1", email: "john@example.com", username: "JohnDoe", fullName: "John Doe", profileImageUrl: "profile-img1", bio: "iOS Developer"),
-        User(id: "2", email: "jane@example.com", username: "JaneDoe", profileImageUrl: "profile-img2", bio: "Designer"),
-        User(id: "3", email: "bob@example.com", username: "BobSmith", profileImageUrl: "profile-img3", bio: "Software Engineer")
+        User(id: "1", email: "john@example.com", username: "JohnDoe", fullName: "John Doe", profileImageUrl: nil, bio: "iOS Developer"),
+        User(id: "2", email: "jane@example.com", username: "JaneDoe", profileImageUrl: nil, bio: "Designer"),
+        User(id: "3", email: "bob@example.com", username: "BobSmith", profileImageUrl: nil, bio: "Software Engineer")
     ]
 }

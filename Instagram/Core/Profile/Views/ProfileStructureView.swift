@@ -31,11 +31,7 @@ struct ProfileStructureView: View {
                 VStack(spacing: 12) {
                     // MARK: Profile pic & stats
                     HStack {
-                        Image(user.profileImageUrl ?? "default-profile-img")
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: 80, height: 80)
-                            .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+                        ProfileImageView(user: user, size: .large)
                         
                         Spacer()
                         

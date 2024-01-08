@@ -14,11 +14,7 @@ struct SearchItemView: View {
         
         
         HStack {
-            Image(user.profileImageUrl ?? "default-profile-img")
-                .resizable()
-                .scaledToFill()
-                .frame(width: 40, height: 40)
-                .clipShape(/*@START_MENU_TOKEN@*/Circle()/*@END_MENU_TOKEN@*/)
+            ProfileImageView(user: user, size: .extraSmall)
             
             VStack(alignment: .leading, spacing: 0.5) {
                 Text(user.username)

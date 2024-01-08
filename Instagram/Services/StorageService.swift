@@ -16,7 +16,7 @@ struct StorageService {
         let ref = Storage.storage().reference(withPath: path)
         
         do {
-            try await ref.putDataAsync(data)
+            let _ = try await ref.putDataAsync(data)
             let url = try await ref.downloadURL()
             return url.absoluteString
         } catch {
