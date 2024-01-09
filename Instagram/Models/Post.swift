@@ -16,6 +16,8 @@ struct Post: Identifiable, Hashable, Codable {
     let timestamp: Timestamp
     var user: User?
     var likes: Int
+    
+    var didLike: Bool? = false // used locally to optimistcally update ui
 }
 
 extension Post {

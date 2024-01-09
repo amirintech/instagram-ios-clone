@@ -30,3 +30,33 @@ struct PostService {
         return fullPosts
     }
 }
+
+
+// MARK: Likes 
+
+extension PostService {
+    static func like(post: Post) async throws {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        async let _ = try await self.collection.document(post.id).collection("post-likes").document(uid).setData([:])
+        async let _ = try await self.collection.document(post.id).updateData(["likes": post.likes])
+        async let _ = Firestore.firestore().collection("users").document(uid).collection("user-likes").document(post.id).setData([:])
+    }
+    
+    static func unlike(post: Post) async throws {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        async let _ = try await self.collection.document(post.id).collection("post-likes").document(uid).delete()
+        async let _ = try await self.collection.document(post.id).updateData(["likes": post.likes])
+        async let _ = Firestore.firestore().collection("users").document(uid).collection("user-likes").document(post.id).delete()
+    }
+    
+    static func didUserLike(post: Post) async throws -> Bool {
+        guard let uid = Auth.auth().currentUser?.uid else { return false }
+        let snapshot = try await Firestore.firestore().collection("users").document(uid).collection("user-likes").document(post.id).getDocument()
+        
+        return snapshot.exists
+    }
+}
+
+

@@ -9,7 +9,17 @@ import SwiftUI
 import Kingfisher
 
 struct FeedCellView: View {
-    let post: Post
+    @StateObject private var viewModel: FeedCellViewModel
+    var post: Post {
+        return viewModel.post
+    }
+    var didLike: Bool {
+        return post.didLike ?? false
+    }
+    
+    init(post: Post) {
+        self._viewModel = StateObject(wrappedValue: FeedCellViewModel(post: post))
+    }
     
     var body: some View {
         
@@ -39,7 +49,12 @@ struct FeedCellView: View {
             
             // MARK: Action Buttons
             HStack(spacing: 16) {
-                FeedCellActionView(imageName: "heart", action: {})
+                Button {
+                    handleLikeClick()
+                } label:  {
+                    Image(systemName: didLike ? "heart.fill" : "heart")
+                        .foregroundStyle(didLike ? .pink : .black)
+                }
                 
                 FeedCellActionView(imageName: "bubble.right", action: {})
                 
@@ -50,11 +65,13 @@ struct FeedCellView: View {
             .padding(.leading)
             .padding(.top, 4)
             
-            VStack(alignment: .leading, spacing: 1) {
+            VStack(alignment: .leading, spacing: 2) {
                 // MARK: Likes label
-                Text("\(post.likes) likes")
-                    .font(.footnote)
-                    .fontWeight(.semibold)
+                if post.likes > 0 {
+                    Text("\(post.likes) likes")
+                        .font(.footnote)
+                        .fontWeight(.semibold)
+                }
                 
                 // MARK: Caption label
                 if let username = post.user?.username {
@@ -77,6 +94,14 @@ struct FeedCellView: View {
         }
         
         
+    }
+    
+    func handleLikeClick() {
+        if didLike {
+            Task { try await viewModel.unlike() }
+        } else {
+            Task { try await viewModel.like() }
+        }
     }
 }
 

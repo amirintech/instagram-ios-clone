@@ -74,6 +74,7 @@
 		295C70692B4B3C940069A6B3 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 295C70682B4B3C940069A6B3 /* Kingfisher */; };
 		29C4A6FE2B4C99B500E9BD92 /* PostService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C4A6FD2B4C99B500E9BD92 /* PostService.swift */; };
 		29C4A7002B4C9DBE00E9BD92 /* ProfileStructureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C4A6FF2B4C9DBE00E9BD92 /* ProfileStructureViewModel.swift */; };
+		29C4A7022B4CA58F00E9BD92 /* FeedCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29C4A7012B4CA58F00E9BD92 /* FeedCellViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,6 +118,7 @@
 		295C70652B4B33B80069A6B3 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		29C4A6FD2B4C99B500E9BD92 /* PostService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostService.swift; sourceTree = "<group>"; };
 		29C4A6FF2B4C9DBE00E9BD92 /* ProfileStructureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStructureViewModel.swift; sourceTree = "<group>"; };
+		29C4A7012B4CA58F00E9BD92 /* FeedCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCellViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +183,7 @@
 			isa = PBXGroup;
 			children = (
 				29154D292B4C76300062A897 /* FeedViewModel.swift */,
+				29C4A7012B4CA58F00E9BD92 /* FeedCellViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -572,6 +575,7 @@
 				2932ADCF2B485FEA0001B4D7 /* ContentView.swift in Sources */,
 				2953DAF22B48BF420019D662 /* UsernameView.swift in Sources */,
 				293A57EF2B4C131F008BF253 /* ProfileImageView.swift in Sources */,
+				29C4A7022B4CA58F00E9BD92 /* FeedCellViewModel.swift in Sources */,
 				2932ADF82B4876EF0001B4D7 /* TextFieldModifier.swift in Sources */,
 				295547662B4AF675002AE4CF /* SearchViewModel.swift in Sources */,
 				292A6A822B49C0DF00E9A253 /* Post.swift in Sources */,
