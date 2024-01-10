@@ -86,7 +86,7 @@ struct FeedCellView: View {
                 }
                 
                 // MARK: Timestamp
-                Text("12h ago")
+                Text(post.timestamp.toString())
                     .font(.footnote)
             }
             .frame(maxWidth: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: .leading)

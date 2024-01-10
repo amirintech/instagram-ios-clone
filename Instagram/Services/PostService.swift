@@ -9,7 +9,7 @@ import Foundation
 import Firebase
     
 struct PostService {
-    static let collection = Firestore.firestore().collection("posts")
+    static let collection = FirestoreConstants.postsCollection
     
     static func fetchUserPosts(uid: String) async throws -> [Post] {
         let snapshot = try await collection.whereField("userId", isEqualTo: uid).getDocuments()
@@ -40,7 +40,7 @@ extension PostService {
         
         async let _ = try await self.collection.document(post.id).collection("post-likes").document(uid).setData([:])
         async let _ = try await self.collection.document(post.id).updateData(["likes": post.likes])
-        async let _ = Firestore.firestore().collection("users").document(uid).collection("user-likes").document(post.id).setData([:])
+        async let _ = FirestoreConstants.usersCollection.document(uid).collection("user-likes").document(post.id).setData([:])
     }
     
     static func unlike(post: Post) async throws {
@@ -48,12 +48,12 @@ extension PostService {
         
         async let _ = try await self.collection.document(post.id).collection("post-likes").document(uid).delete()
         async let _ = try await self.collection.document(post.id).updateData(["likes": post.likes])
-        async let _ = Firestore.firestore().collection("users").document(uid).collection("user-likes").document(post.id).delete()
+        async let _ = FirestoreConstants.usersCollection.document(uid).collection("user-likes").document(post.id).delete()
     }
     
     static func didUserLike(post: Post) async throws -> Bool {
         guard let uid = Auth.auth().currentUser?.uid else { return false }
-        let snapshot = try await Firestore.firestore().collection("users").document(uid).collection("user-likes").document(post.id).getDocument()
+        let snapshot = try await FirestoreConstants.usersCollection.document(uid).collection("user-likes").document(post.id).getDocument()
         
         return snapshot.exists
     }

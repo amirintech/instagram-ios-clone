@@ -12,9 +12,8 @@ import Firebase
 struct CommentService {
     static func upload(comment: Comment) async throws {
         guard let data = try? Firestore.Encoder().encode(comment) else { return }
-        try await Firestore
-            .firestore()
-            .collection("posts")
+        try await FirestoreConstants
+            .postsCollection
             .document(comment.postId)
             .collection("post-comments")
             .addDocument(data: data)
@@ -22,25 +21,25 @@ struct CommentService {
     
     static func fetchComments(for postId: String) async throws -> [Comment] {
         // fetch comments
-        let snapshot = try await Firestore
-                                    .firestore()
-                                    .collection("posts")
-                                    .document(postId)
-                                    .collection("post-comments")
-                                    .order(by: "timestamp", descending: true)
-                                    .getDocuments()
+        let snapshot = try await
+        FirestoreConstants
+            .postsCollection
+            .document(postId)
+            .collection("post-comments")
+            .order(by: "timestamp", descending: true)
+            .getDocuments()
         
         let comments = snapshot.documents.compactMap { try? $0.data(as: Comment.self) }
         
         // populate comments with users
         var commentsWithUsers: [Comment] = []
         for comment in comments {
-            let user = try await Firestore
-                                    .firestore()
-                                    .collection("users")
-                                    .document(comment.commentOwnerId)
-                                    .getDocument()
-                                    .data(as: User.self)
+            let user = try await
+            FirestoreConstants
+                .usersCollection
+                .document(comment.commentOwnerId)
+                .getDocument()
+                .data(as: User.self)
             
             var commentWithUser = comment
             commentWithUser.user = user

@@ -59,7 +59,7 @@ class EditProfileViewModel: ObservableObject {
         }
         
         if !data.isEmpty {
-            let userDocumentRef = Firestore.firestore().collection("users").document(user.id)
+            let userDocumentRef = FirestoreConstants.usersCollection.document(user.id)
             try await userDocumentRef.updateData(data)
             
             // delete old profile image if any

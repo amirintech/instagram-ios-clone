@@ -74,6 +74,8 @@
 		295C70692B4B3C940069A6B3 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 295C70682B4B3C940069A6B3 /* Kingfisher */; };
 		295E217C2B4EC78F00133E34 /* CommentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295E217B2B4EC78F00133E34 /* CommentService.swift */; };
 		295E217E2B4EC7A000133E34 /* CommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295E217D2B4EC7A000133E34 /* CommentViewModel.swift */; };
+		295E21802B4EDB2D00133E34 /* Timestamp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295E217F2B4EDB2D00133E34 /* Timestamp.swift */; };
+		295E21832B4EDDA800133E34 /* FirebaseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295E21822B4EDDA800133E34 /* FirebaseConstants.swift */; };
 		297C7AED2B4DAC8300B795CA /* CommentCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297C7AEC2B4DAC8300B795CA /* CommentCellView.swift */; };
 		297C7AF02B4DAC9600B795CA /* CommentsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297C7AEF2B4DAC9600B795CA /* CommentsView.swift */; };
 		297C7AF42B4DB70C00B795CA /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 297C7AF32B4DB70C00B795CA /* Comment.swift */; };
@@ -123,6 +125,8 @@
 		295C70652B4B33B80069A6B3 /* StorageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageService.swift; sourceTree = "<group>"; };
 		295E217B2B4EC78F00133E34 /* CommentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentService.swift; sourceTree = "<group>"; };
 		295E217D2B4EC7A000133E34 /* CommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentViewModel.swift; sourceTree = "<group>"; };
+		295E217F2B4EDB2D00133E34 /* Timestamp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timestamp.swift; sourceTree = "<group>"; };
+		295E21822B4EDDA800133E34 /* FirebaseConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseConstants.swift; sourceTree = "<group>"; };
 		297C7AEC2B4DAC8300B795CA /* CommentCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCellView.swift; sourceTree = "<group>"; };
 		297C7AEF2B4DAC9600B795CA /* CommentsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsView.swift; sourceTree = "<group>"; };
 		297C7AF32B4DB70C00B795CA /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
@@ -299,6 +303,7 @@
 				292A6AC22B49D76400E9A253 /* Services */,
 				2932ADDC2B48600B0001B4D7 /* Extenstions */,
 				2932ADDD2B48601A0001B4D7 /* Models */,
+				295E21812B4EDD9300133E34 /* Utils */,
 				2932ADD02B485FEB0001B4D7 /* Assets.xcassets */,
 				2932ADD22B485FEB0001B4D7 /* Preview Content */,
 				29154D2B2B4C7E940062A897 /* GoogleService-Info.plist */,
@@ -342,6 +347,7 @@
 		2932ADDC2B48600B0001B4D7 /* Extenstions */ = {
 			isa = PBXGroup;
 			children = (
+				295E217F2B4EDB2D00133E34 /* Timestamp.swift */,
 			);
 			path = Extenstions;
 			sourceTree = "<group>";
@@ -464,6 +470,14 @@
 				295E217B2B4EC78F00133E34 /* CommentService.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		295E21812B4EDD9300133E34 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				295E21822B4EDDA800133E34 /* FirebaseConstants.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		297C7AEB2B4DAC7100B795CA /* Comments */ = {
@@ -627,6 +641,7 @@
 				292B6A162B4B06E000E3F804 /* EditProfileViewModel.swift in Sources */,
 				290B363A2B4AB5E600A9F6AF /* RegisterationViewModel.swift in Sources */,
 				2932ADF32B4873020001B4D7 /* SearchItemView.swift in Sources */,
+				295E21832B4EDDA800133E34 /* FirebaseConstants.swift in Sources */,
 				2932ADE62B4861CE0001B4D7 /* ProfileView.swift in Sources */,
 				29154D2A2B4C76300062A897 /* FeedViewModel.swift in Sources */,
 				2932ADCF2B485FEA0001B4D7 /* ContentView.swift in Sources */,
@@ -638,6 +653,7 @@
 				2932ADF82B4876EF0001B4D7 /* TextFieldModifier.swift in Sources */,
 				295547662B4AF675002AE4CF /* SearchViewModel.swift in Sources */,
 				292A6A822B49C0DF00E9A253 /* Post.swift in Sources */,
+				295E21802B4EDB2D00133E34 /* Timestamp.swift in Sources */,
 				292A6AC42B49D77400E9A253 /* AuthService.swift in Sources */,
 				2932ADE42B48609D0001B4D7 /* TabBarView.swift in Sources */,
 				2953DAF42B48C0200019D662 /* PrimaryButtonLabelModifier.swift in Sources */,
