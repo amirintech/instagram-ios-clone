@@ -15,7 +15,7 @@ struct FeedCellActionView: View {
         
         
         Button {
-            print("FEED CELL ACTION BUTTON CLICKED")
+            action()
         } label:  {
             Image(systemName: imageName)
                 .foregroundStyle(.black)

@@ -9,6 +9,7 @@ import SwiftUI
 import Kingfisher
 
 struct FeedCellView: View {
+    @State var showComments = false
     @StateObject private var viewModel: FeedCellViewModel
     var post: Post {
         return viewModel.post
@@ -56,7 +57,7 @@ struct FeedCellView: View {
                         .foregroundStyle(didLike ? .pink : .black)
                 }
                 
-                FeedCellActionView(imageName: "bubble.right", action: {})
+                FeedCellActionView(imageName: "bubble.right", action: { showComments.toggle() })
                 
                 FeedCellActionView(imageName: "paperplane", action: {})
                 
@@ -92,6 +93,11 @@ struct FeedCellView: View {
             .padding(.horizontal)
             .padding(.top, 1)
         }
+        .sheet(isPresented: $showComments) {
+            CommentsView(post: post)
+                .presentationDragIndicator(.visible)
+        }
+        
         
         
     }
