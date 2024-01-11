@@ -9,6 +9,7 @@ import Foundation
 import FirebaseAuth
 import Firebase
 import FirebaseFirestoreSwift
+import FirebaseFirestore
 
 class AuthService {
     @Published var userSession: FirebaseAuth.User?
@@ -59,6 +60,6 @@ class AuthService {
         let user = User(id: uid, email: email, username: username)
         self.currentUser = user
         guard let encodedUser = try? Firestore.Encoder().encode(user) else { return }
-        try? await FirestoreConstants.usersCollection.document(user.id).setData(encodedUser)
+        let ref = try? await FirestoreConstants.usersCollection.document(user.id).setData(encodedUser)
     }
 }

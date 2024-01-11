@@ -102,9 +102,6 @@ struct ProfileStructureView: View {
         }
         .navigationTitle("Profile")
         .navigationBarTitleDisplayMode(.inline)
-        .onAppear {
-            print(user)
-        }
         .fullScreenCover(isPresented: $showEditProfileView) {
             EditProfileView(user: user)
         }

@@ -15,11 +15,12 @@ struct FeedView: View {
         
         NavigationStack {
             ScrollView {
-                LazyVStack(spacing: 42)  {
+                LazyVStack(spacing: 28)  {
                     ForEach(viewModel.posts) { post in
                         FeedCellView(post: post)
                     }
                 }
+                .padding(.vertical)
             }
             .navigationTitle("Feed")
             .navigationBarTitleDisplayMode(.inline)

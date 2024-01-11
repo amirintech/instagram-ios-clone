@@ -10,8 +10,7 @@ import Firebase
 
 struct UserService {
     static func fetchUser(uid: String) async throws -> User {
-        let snapshot = try await FirestoreConstants.usersCollection.document(uid).getDocument()
-        return try snapshot.data(as: User.self)
+        return try await FirestoreConstants.usersCollection.document(uid).getDocument(as: User.self)
     }
     
     static func fetchAllUsers() async throws -> [User] {
