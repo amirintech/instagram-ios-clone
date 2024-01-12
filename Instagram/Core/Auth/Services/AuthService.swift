@@ -16,13 +16,17 @@ class AuthService {
     @Published var currentUser: User?
     
     static let shared = AuthService()
+    static var currentUid: String? {
+        return Auth.auth().currentUser?.uid
+    }
+    
     
     init() {
         Task { try await loadUserData() }
     }
     
     @MainActor
-    func login(email: String, password: String) async throws {
+    func login(withEmail email: String, password: String) async throws {
         do {
             let result = try await Auth.auth().signIn(withEmail: email, password: password)
             self.userSession = result.user
@@ -60,6 +64,6 @@ class AuthService {
         let user = User(id: uid, email: email, username: username)
         self.currentUser = user
         guard let encodedUser = try? Firestore.Encoder().encode(user) else { return }
-        let ref = try? await FirestoreConstants.usersCollection.document(user.id).setData(encodedUser)
+        try? await FirestoreConstants.usersCollection.document(user.id).setData(encodedUser)
     }
 }

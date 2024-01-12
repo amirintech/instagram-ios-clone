@@ -22,7 +22,7 @@ struct ContentView: View {
                 TabBarView(user: currentUser)
             }
         }
-        
+
         
     }
 }

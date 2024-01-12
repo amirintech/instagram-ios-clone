@@ -16,10 +16,19 @@ struct User: Identifiable, Codable, Hashable {
     var profileImageUrl: String?
     var bio: String?
     
+    // local properties for UI
     var isCurrentUser: Bool {
         guard let currentUid = Auth.auth().currentUser?.uid else { return false }
         return currentUid == id
     }
+    var isFollowed: Bool?
+    var stats: UserStats?
+}
+
+struct UserStats: Codable, Hashable {
+    var followingCount: Int
+    var followersCount: Int
+    var postsCount: Int
 }
 
 extension User {

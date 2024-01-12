@@ -18,3 +18,33 @@ struct UserService {
         return snapshot.documents.compactMap({ try? $0.data(as: User.self) })
     }
 }
+
+// MARK: User Stats
+extension UserService {
+    static func fetchStats(uid: String) async throws -> UserStats {
+        async let followingCount =
+        FirestoreConstants
+            .usersCollection
+            .document(uid)
+            .collection("following")
+            .getDocuments()
+            .count
+        
+        async let followersCount =
+        FirestoreConstants
+            .usersCollection
+            .document(uid)
+            .collection("followers")
+            .getDocuments()
+            .count
+        
+        async let postsCount =
+        FirestoreConstants
+            .postsCollection
+            .whereField("userId", isEqualTo: uid)
+            .getDocuments()
+            .count
+        
+        return try  await .init(followingCount: followingCount, followersCount: followersCount, postsCount: postsCount)
+    }
+}

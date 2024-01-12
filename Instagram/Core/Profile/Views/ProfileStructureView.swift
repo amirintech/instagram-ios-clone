@@ -9,19 +9,21 @@ import SwiftUI
 import Kingfisher
 
 struct ProfileStructureView: View {
-    private let imageDimension = UIScreen.main.bounds.width / 3 - 1
-    private let gridCols: [GridItem] = [
-        .init(.flexible(), spacing: 1),
-        .init(.flexible(), spacing: 1),
-        .init(.flexible(), spacing: 1),
-    ]
-    let user: User
-    
     @State private var showEditProfileView = false
     @StateObject private var viewModel: ProfileStructureViewModel
     
+    private var user: User {
+        return viewModel.user
+    }
+    private var isFollowed: Bool {
+        return viewModel.user.isFollowed ?? false
+    }
+    private var stats: UserStats {
+        return user.stats ?? UserStats(followingCount: 0, followersCount: 0, postsCount: 0)
+    }
+    
+    
     init(user: User) {
-        self.user = user
         self._viewModel = StateObject(wrappedValue: ProfileStructureViewModel(user: user))
     }
     
@@ -38,12 +40,17 @@ struct ProfileStructureView: View {
                         
                         Spacer()
                         
-                        ProfileStatView(title: "Posts", value: 6)
-                        ProfileStatView(title: "Followers", value: 60)
-                        ProfileStatView(title: "Following", value: 16)
+                        ProfileStatView(title: "Posts", value: stats.postsCount)
+                        
+                        NavigationLink(value: UserList.followers(uid: user.id)) {
+                            ProfileStatView(title: "Followers", value: stats.followersCount)
+                        }
+                        
+                        NavigationLink(value: UserList.following(uid: user.id)) {
+                            ProfileStatView(title: "Following", value: stats.followingCount)
+                        }
                     }
                     .frame(maxWidth: .infinity)
-                    
                     
                     // MARK: Name & bio
                     VStack(alignment: .leading) {
@@ -61,49 +68,38 @@ struct ProfileStructureView: View {
                     
                     // MARK: Action button
                     if user.isCurrentUser {
-                        Button {
-                            showEditProfileView = true
-                        } label: {
-                            Text("Edit Profile")
-                                .font(.subheadline)
-                                .fontWeight(.semibold)
-                                .foregroundStyle(.black)
-                                .padding(.vertical, 8)
-                                .frame(maxWidth: .infinity)
-                                .overlay {
-                                    RoundedRectangle(cornerRadius: 4)
-                                        .stroke(lineWidth: 1)
-                                        .foregroundStyle(.black)
-                                }
-                        }
+                        ActionButtonView(variant: .secondary, action: { showEditProfileView = true }, text: "Edit Profile")
+                    } else if isFollowed {
+                        ActionButtonView(variant: .secondary, action: { viewModel.unfollow() }, text: "Unfollow")
                     } else {
-                        Button {
-                            
-                        } label: {
-                            Text("Follow")
-                                .modifier(PrimaryButtonLabelModifier(padding: (vertical: 8, horizontal: 0)))
-                        }
+                        ActionButtonView(action: { viewModel.follow() }, text: "Follow")
                     }
                 }.padding(.horizontal)
                 
                 // MARK: Posts grid
-                LazyVGrid(columns: gridCols, spacing: 1) {
-                    ForEach(viewModel.posts) { post in
-                        KFImage(URL(string: post.imageUrl))
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: imageDimension, height: imageDimension)
-                            .clipped()
-                    }
-                }
+                ProfileGridView(posts: viewModel.posts)
                 
                 Spacer()
+            }
+            .navigationDestination(for: UserList.self) { list in
+                Text(list.title)
             }
         }
         .navigationTitle("Profile")
         .navigationBarTitleDisplayMode(.inline)
         .fullScreenCover(isPresented: $showEditProfileView) {
             EditProfileView(user: user)
+        }
+        .onAppear {
+            viewModel.loadPosts()
+            
+            if user.isFollowed == nil {
+                viewModel.initFollowingState()
+            }
+            
+            if user.stats == nil {
+                viewModel.fetchStats()
+            }
         }
         
         
