@@ -17,9 +17,11 @@ This project is an Instagram clone built for iOS using Swift and Firebase. It re
 - **Firebase Authentication** (for user authentication)
 - **Firebase Firestore** (for real-time database)
 - **Firebase Storage** (for image uploads)
-- **CocoaPods** (for dependency management)
 
 ## Screenshots
-![landing screen](./screenshots/landing.png)
-![home screen](./screenshots/home.png)
-![explore screen](./screenshots/explore.png)
+<p align="center">
+  <img src="./screenshots/landing.png" width="30%" />
+  <img src="./screenshots/home.png" width="30%" />
+  <img src="./screenshots/explore.png" width="30%" />
+</p>
+
